@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BusiSellMapper">
+    
+    <resultMap type="BusiSell" id="BusiSellResult">
+        <result property="sellId"    column="sell_id"    />
+        <result property="sellDate"    column="sell_date"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="productName"    column="product_name"    />
+        <result property="productSell"    column="product_sell"    />
+        <result property="productNum"    column="product_num"    />
+        <result property="productSumsell"    column="product_sumsell"    />
+        <result property="productPrice"    column="product_price"    />
+        <result property="productSumprice"    column="product_sumprice"    />
+        <result property="productSupplier"    column="product_supplier"    />
+        <result property="productFastmail"    column="product_fastmail"    />
+        <result property="productFastmailfee"    column="product_fastmailfee"    />
+        <result property="personName"    column="person_name"    />
+        <result property="personPhone"    column="person_phone"    />
+        <result property="sellProfit"    column="sell_profit"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusiSellVo">
+        select sell_id, sell_date, customer_name, product_name, product_sell, product_num, product_sumsell, product_price, product_sumprice, product_supplier, product_fastmail, product_fastmailfee, person_name, person_phone, sell_profit, create_by, create_time, update_by, update_time, remark from busi_sell
+    </sql>
+
+    <select id="selectBusiSellList" parameterType="BusiSell" resultMap="BusiSellResult">
+        <include refid="selectBusiSellVo"/>
+        <where>  
+            <if test="sellDate != null "> and sell_date = #{sellDate}</if>
+            <if test="customerName != null  and customerName != ''"> and customer_name like concat('%', #{customerName}, '%')</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="productSupplier != null  and productSupplier != ''"> and product_supplier = #{productSupplier}</if>
+            <if test="personName != null  and personName != ''"> and person_name like concat('%', #{personName}, '%')</if>
+            <if test="personPhone != null  and personPhone != ''"> and person_phone = #{personPhone}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusiSellById" parameterType="Long" resultMap="BusiSellResult">
+        <include refid="selectBusiSellVo"/>
+        where sell_id = #{sellId}
+    </select>
+        
+    <insert id="insertBusiSell" parameterType="BusiSell" useGeneratedKeys="true" keyProperty="sellId">
+        insert into busi_sell
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sellDate != null">sell_date,</if>
+            <if test="customerName != null">customer_name,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="productSell != null">product_sell,</if>
+            <if test="productNum != null">product_num,</if>
+            <if test="productSumsell != null">product_sumsell,</if>
+            <if test="productPrice != null">product_price,</if>
+            <if test="productSumprice != null">product_sumprice,</if>
+            <if test="productSupplier != null">product_supplier,</if>
+            <if test="productFastmail != null">product_fastmail,</if>
+            <if test="productFastmailfee != null">product_fastmailfee,</if>
+            <if test="personName != null">person_name,</if>
+            <if test="personPhone != null">person_phone,</if>
+            <if test="sellProfit != null">sell_profit,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sellDate != null">#{sellDate},</if>
+            <if test="customerName != null">#{customerName},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="productSell != null">#{productSell},</if>
+            <if test="productNum != null">#{productNum},</if>
+            <if test="productSumsell != null">#{productSumsell},</if>
+            <if test="productPrice != null">#{productPrice},</if>
+            <if test="productSumprice != null">#{productSumprice},</if>
+            <if test="productSupplier != null">#{productSupplier},</if>
+            <if test="productFastmail != null">#{productFastmail},</if>
+            <if test="productFastmailfee != null">#{productFastmailfee},</if>
+            <if test="personName != null">#{personName},</if>
+            <if test="personPhone != null">#{personPhone},</if>
+            <if test="sellProfit != null">#{sellProfit},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusiSell" parameterType="BusiSell">
+        update busi_sell
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sellDate != null">sell_date = #{sellDate},</if>
+            <if test="customerName != null">customer_name = #{customerName},</if>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="productSell != null">product_sell = #{productSell},</if>
+            <if test="productNum != null">product_num = #{productNum},</if>
+            <if test="productSumsell != null">product_sumsell = #{productSumsell},</if>
+            <if test="productPrice != null">product_price = #{productPrice},</if>
+            <if test="productSumprice != null">product_sumprice = #{productSumprice},</if>
+            <if test="productSupplier != null">product_supplier = #{productSupplier},</if>
+            <if test="productFastmail != null">product_fastmail = #{productFastmail},</if>
+            <if test="productFastmailfee != null">product_fastmailfee = #{productFastmailfee},</if>
+            <if test="personName != null">person_name = #{personName},</if>
+            <if test="personPhone != null">person_phone = #{personPhone},</if>
+            <if test="sellProfit != null">sell_profit = #{sellProfit},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where sell_id = #{sellId}
+    </update>
+
+    <delete id="deleteBusiSellById" parameterType="Long">
+        delete from busi_sell where sell_id = #{sellId}
+    </delete>
+
+    <delete id="deleteBusiSellByIds" parameterType="String">
+        delete from busi_sell where sell_id in 
+        <foreach item="sellId" collection="array" open="(" separator="," close=")">
+            #{sellId}
+        </foreach>
+    </delete>
+    
+</mapper>

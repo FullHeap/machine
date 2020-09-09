@@ -1,0 +1,57 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql5-17456ae96be-3c3ec2401f200bc2": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - localhost",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"url": "jdbc:mysql://localhost:3306/",
+				"home": "MySQL Binaries",
+				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000",
+					"serverTimezone": "UTC"
+				},
+				"auth-model": "native",
+				"handlers": {}
+			}
+		},
+		"mysql5-17456b1d654-380f6d5bd8405e20": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - localhost 2",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"url": "jdbc:mysql://localhost:3306/",
+				"home": "MySQL Binaries",
+				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000",
+					"serverTimezone": "UTC"
+				},
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}

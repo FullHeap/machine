@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BusiProductionMapper">
+    
+    <resultMap type="BusiProduction" id="BusiProductionResult">
+        <result property="productId"    column="product_id"    />
+        <result property="productCode"    column="product_code"    />
+        <result property="productPtype"    column="product_ptype"    />
+        <result property="productNorms"    column="product_norms"    />
+        <result property="productModel"    column="product_model"    />
+        <result property="productName"    column="product_name"    />
+        <result property="productPrice"    column="product_price"    />
+        <result property="productBprice"    column="product_bprice"    />
+        <result property="productWeight"    column="product_weight"    />
+        <result property="productSupplier"    column="product_supplier"    />
+        <result property="productFastmail"    column="product_fastmail"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusiProductionVo">
+        select product_id, product_code, product_ptype, product_norms, product_model, product_name, product_price, product_bprice, product_weight, product_supplier, product_fastmail, create_by, create_time, update_by, update_time, remark from busi_production
+    </sql>
+
+    <select id="selectBusiProductionList" parameterType="BusiProduction" resultMap="BusiProductionResult">
+        <include refid="selectBusiProductionVo"/>
+        <where>  
+            <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
+            <if test="productPtype != null  and productPtype != ''"> and product_ptype = #{productPtype}</if>
+            <if test="productNorms != null  and productNorms != ''"> and product_norms = #{productNorms}</if>
+            <if test="productModel != null  and productModel != ''"> and product_model = #{productModel}</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="productPrice != null "> and product_price = #{productPrice}</if>
+            <if test="productBprice != null "> and product_bprice = #{productBprice}</if>
+            <if test="productWeight != null  and productWeight != ''"> and product_weight = #{productWeight}</if>
+            <if test="productSupplier != null  and productSupplier != ''"> and product_supplier = #{productSupplier}</if>
+            <if test="productFastmail != null  and productFastmail != ''"> and product_fastmail = #{productFastmail}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusiProductionById" parameterType="Long" resultMap="BusiProductionResult">
+        <include refid="selectBusiProductionVo"/>
+        where product_id = #{productId}
+    </select>
+        
+    <insert id="insertBusiProduction" parameterType="BusiProduction" useGeneratedKeys="true" keyProperty="productId">
+        insert into busi_production
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productCode != null">product_code,</if>
+            <if test="productPtype != null">product_ptype,</if>
+            <if test="productNorms != null">product_norms,</if>
+            <if test="productModel != null">product_model,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="productPrice != null">product_price,</if>
+            <if test="productBprice != null">product_bprice,</if>
+            <if test="productWeight != null">product_weight,</if>
+            <if test="productSupplier != null">product_supplier,</if>
+            <if test="productFastmail != null">product_fastmail,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productCode != null">#{productCode},</if>
+            <if test="productPtype != null">#{productPtype},</if>
+            <if test="productNorms != null">#{productNorms},</if>
+            <if test="productModel != null">#{productModel},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="productPrice != null">#{productPrice},</if>
+            <if test="productBprice != null">#{productBprice},</if>
+            <if test="productWeight != null">#{productWeight},</if>
+            <if test="productSupplier != null">#{productSupplier},</if>
+            <if test="productFastmail != null">#{productFastmail},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusiProduction" parameterType="BusiProduction">
+        update busi_production
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productCode != null">product_code = #{productCode},</if>
+            <if test="productPtype != null">product_ptype = #{productPtype},</if>
+            <if test="productNorms != null">product_norms = #{productNorms},</if>
+            <if test="productModel != null">product_model = #{productModel},</if>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="productPrice != null">product_price = #{productPrice},</if>
+            <if test="productBprice != null">product_bprice = #{productBprice},</if>
+            <if test="productWeight != null">product_weight = #{productWeight},</if>
+            <if test="productSupplier != null">product_supplier = #{productSupplier},</if>
+            <if test="productFastmail != null">product_fastmail = #{productFastmail},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where product_id = #{productId}
+    </update>
+
+    <delete id="deleteBusiProductionById" parameterType="Long">
+        delete from busi_production where product_id = #{productId}
+    </delete>
+
+    <delete id="deleteBusiProductionByIds" parameterType="String">
+        delete from busi_production where product_id in 
+        <foreach item="productId" collection="array" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,1 @@
+SELECT * FROM sys_dict_data

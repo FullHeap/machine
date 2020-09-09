@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BusiCustomerMapper">
+    
+    <resultMap type="BusiCustomer" id="BusiCustomerResult">
+        <result property="customerId"    column="customer_id"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companySh"    column="company_sh"    />
+        <result property="companyAddress"    column="company_address"    />
+        <result property="companyTel"    column="company_tel"    />
+        <result property="companyAcct"    column="company_acct"    />
+        <result property="companyBank"    column="company_bank"    />
+        <result property="personName"    column="person_name"    />
+        <result property="personPhone"    column="person_phone"    />
+        <result property="personWechat"    column="person_wechat"    />
+        <result property="personMail"    column="person_mail"    />
+        <result property="customerLevel"    column="customer_level"    />
+        <result property="togeterTime"    column="togeter_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusiCustomerVo">
+        select customer_id, customer_name, company_name, company_sh, company_address, company_tel, company_acct, company_bank, person_name, person_phone, person_wechat, person_mail, customer_level, togeter_time, create_by, create_time, update_by, update_time, remark from busi_customer
+    </sql>
+
+    <select id="selectBusiCustomerList" parameterType="BusiCustomer" resultMap="BusiCustomerResult">
+        <include refid="selectBusiCustomerVo"/>
+        <where>  
+            <if test="customerName != null  and customerName != ''"> and customer_name like concat('%', #{customerName}, '%')</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyTel != null  and companyTel != ''"> and company_tel = #{companyTel}</if>
+            <if test="companyAcct != null  and companyAcct != ''"> and company_acct = #{companyAcct}</if>
+            <if test="personName != null  and personName != ''"> and person_name like concat('%', #{personName}, '%')</if>
+            <if test="personPhone != null  and personPhone != ''"> and person_phone = #{personPhone}</if>
+            <if test="customerLevel != null  and customerLevel != ''"> and customer_level = #{customerLevel}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusiCustomerById" parameterType="Long" resultMap="BusiCustomerResult">
+        <include refid="selectBusiCustomerVo"/>
+        where customer_id = #{customerId}
+    </select>
+        
+    <insert id="insertBusiCustomer" parameterType="BusiCustomer" useGeneratedKeys="true" keyProperty="customerId">
+        insert into busi_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerName != null">customer_name,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companySh != null">company_sh,</if>
+            <if test="companyAddress != null">company_address,</if>
+            <if test="companyTel != null">company_tel,</if>
+            <if test="companyAcct != null">company_acct,</if>
+            <if test="companyBank != null">company_bank,</if>
+            <if test="personName != null">person_name,</if>
+            <if test="personPhone != null">person_phone,</if>
+            <if test="personWechat != null">person_wechat,</if>
+            <if test="personMail != null">person_mail,</if>
+            <if test="customerLevel != null">customer_level,</if>
+            <if test="togeterTime != null">togeter_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerName != null">#{customerName},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companySh != null">#{companySh},</if>
+            <if test="companyAddress != null">#{companyAddress},</if>
+            <if test="companyTel != null">#{companyTel},</if>
+            <if test="companyAcct != null">#{companyAcct},</if>
+            <if test="companyBank != null">#{companyBank},</if>
+            <if test="personName != null">#{personName},</if>
+            <if test="personPhone != null">#{personPhone},</if>
+            <if test="personWechat != null">#{personWechat},</if>
+            <if test="personMail != null">#{personMail},</if>
+            <if test="customerLevel != null">#{customerLevel},</if>
+            <if test="togeterTime != null">#{togeterTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusiCustomer" parameterType="BusiCustomer">
+        update busi_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerName != null">customer_name = #{customerName},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companySh != null">company_sh = #{companySh},</if>
+            <if test="companyAddress != null">company_address = #{companyAddress},</if>
+            <if test="companyTel != null">company_tel = #{companyTel},</if>
+            <if test="companyAcct != null">company_acct = #{companyAcct},</if>
+            <if test="companyBank != null">company_bank = #{companyBank},</if>
+            <if test="personName != null">person_name = #{personName},</if>
+            <if test="personPhone != null">person_phone = #{personPhone},</if>
+            <if test="personWechat != null">person_wechat = #{personWechat},</if>
+            <if test="personMail != null">person_mail = #{personMail},</if>
+            <if test="customerLevel != null">customer_level = #{customerLevel},</if>
+            <if test="togeterTime != null">togeter_time = #{togeterTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where customer_id = #{customerId}
+    </update>
+
+    <delete id="deleteBusiCustomerById" parameterType="Long">
+        delete from busi_customer where customer_id = #{customerId}
+    </delete>
+
+    <delete id="deleteBusiCustomerByIds" parameterType="String">
+        delete from busi_customer where customer_id in 
+        <foreach item="customerId" collection="array" open="(" separator="," close=")">
+            #{customerId}
+        </foreach>
+    </delete>
+    
+</mapper>
